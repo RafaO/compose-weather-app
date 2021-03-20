@@ -16,6 +16,7 @@
 package com.example.androiddevchallenge.ui.screen.info
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,7 +28,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -35,35 +35,53 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.HourForecast
 
 @Composable
-fun HoursForecast(forecast: List<HourForecast>) = LazyRow(
-    Modifier
-        .fillMaxWidth()
-        .padding(start = 8.dp)
-) {
-    items(forecast) { HourForecast(it) }
+fun HoursForecast(forecast: List<HourForecast>) {
+    var selectedIndex by remember { mutableStateOf(0) }
+
+    LazyRow(
+        Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp)
+    ) {
+        items(forecast.size) { index ->
+            HourForecast(forecast[index], index == selectedIndex) {
+                selectedIndex = index
+            }
+        }
+    }
 }
 
 @Composable
-fun HourForecast(forecast: HourForecast) = Row {
-    Box(Modifier.clip(CircleShape)) {
+fun HourForecast(forecast: HourForecast, selected: Boolean, onClick: () -> Unit) = Row {
+    Box(
+        Modifier
+            .clip(CircleShape)
+            .clickable { onClick() }
+    ) {
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .background(color = MaterialTheme.colors.primaryVariant)
+                .background(color = if (selected) MaterialTheme.colors.background else MaterialTheme.colors.primaryVariant)
                 .height(130.dp)
         ) {
             Text(forecast.time)
             Icon(
                 Icons.Filled.WbSunny,
-                "play",
+                stringResource(R.string.accessibility_sun),
                 Modifier.size(24.dp)
             )
             Text(forecast.temperature)
