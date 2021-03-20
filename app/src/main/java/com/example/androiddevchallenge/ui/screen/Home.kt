@@ -15,19 +15,13 @@
  */
 package com.example.androiddevchallenge.ui.screen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.domain.model.CityInfo
 import com.example.androiddevchallenge.viewmodel.HomeScreenState
 import com.example.androiddevchallenge.viewmodel.HomeViewModel
 
@@ -49,15 +43,6 @@ fun Content(state: HomeScreenState) {
 
 @Composable
 fun LoadingScreen() = Text(stringResource(R.string.loading))
-
-@Composable
-fun InfoScreen(cityInfo: CityInfo) = Column(
-    modifier = Modifier.fillMaxWidth(),
-    horizontalAlignment = Alignment.CenterHorizontally
-) {
-    Text(cityInfo.temperature, style = MaterialTheme.typography.h1)
-    Text(cityInfo.name)
-}
 
 @Composable
 fun ErrorScreen() = Text(stringResource(R.string.error))
