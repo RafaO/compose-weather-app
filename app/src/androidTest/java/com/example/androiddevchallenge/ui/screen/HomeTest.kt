@@ -36,6 +36,6 @@ class HomeTest {
             }
         }
 
-        composeTestRule.onNodeWithText("Córdoba").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Loading").assertIsDisplayed()
     }
 }

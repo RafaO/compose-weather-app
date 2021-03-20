@@ -15,10 +15,22 @@
  */
 package com.example.androiddevchallenge.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import com.example.androiddevchallenge.domain.model.CityInfo
+import kotlinx.coroutines.delay
+
+sealed class HomeScreenState {
+    object Loading : HomeScreenState()
+    class Info(val info: CityInfo) : HomeScreenState()
+    object Error : HomeScreenState()
+}
 
 class HomeViewModel : ViewModel() {
-    private val _city = MutableLiveData("Córdoba")
-    val city = _city
+    private val _state = liveData {
+        emit(HomeScreenState.Loading)
+        delay(1000)
+        emit(HomeScreenState.Info(CityInfo("Córdoba", "25°C")))
+    }
+    val state = _state
 }

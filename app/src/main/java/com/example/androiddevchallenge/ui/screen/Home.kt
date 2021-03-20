@@ -15,16 +15,42 @@
  */
 package com.example.androiddevchallenge.ui.screen
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.androiddevchallenge.R
+import com.example.androiddevchallenge.domain.model.CityInfo
+import com.example.androiddevchallenge.viewmodel.HomeScreenState
 import com.example.androiddevchallenge.viewmodel.HomeViewModel
 
 @Composable
 fun Home(viewModel: HomeViewModel = viewModel()) {
-    val city by viewModel.city.observeAsState("")
+    val state by viewModel.state.observeAsState(HomeScreenState.Loading)
 
-    Text(city)
+    Content(state)
 }
+
+@Composable
+fun Content(state: HomeScreenState) {
+    when (state) {
+        is HomeScreenState.Loading -> LoadingScreen()
+        is HomeScreenState.Info -> InfoScreen(state.info)
+        is HomeScreenState.Error -> ErrorScreen()
+    }
+}
+
+@Composable
+fun LoadingScreen() = Text(stringResource(R.string.loading))
+
+@Composable
+fun InfoScreen(cityInfo: CityInfo) = Column {
+    Text(cityInfo.name)
+    Text(cityInfo.temperature)
+}
+
+@Composable
+fun ErrorScreen() = Text(stringResource(R.string.error))

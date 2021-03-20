@@ -16,15 +16,18 @@
 package com.example.androiddevchallenge.viewmodel
 
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Test
 
-class HomeViewModelTest {
+@ExperimentalCoroutinesApi
+class HomeViewModelTest : CoroutinesTest() {
+
     @Test
-    fun whenCreatedItReturnsCordoba() {
+    fun `when created, it emits loading state`() {
         // when
         val subject = HomeViewModel()
 
         // then
-        assertEquals("Córdoba", subject.city.value)
+        assertEquals(HomeScreenState.Loading, subject.state.getOrAwaitValue())
     }
 }
