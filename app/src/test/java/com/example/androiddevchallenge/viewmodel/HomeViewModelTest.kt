@@ -13,13 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge
+package com.example.androiddevchallenge.viewmodel
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    // Add unit tests here
+import junit.framework.Assert.assertEquals
+import org.junit.Test
+
+class HomeViewModelTest {
+    @Test
+    fun whenCreatedItReturnsCordoba() {
+        // when
+        val subject = HomeViewModel()
+
+        // then
+        assertEquals("Córdoba", subject.city.value)
+    }
 }
