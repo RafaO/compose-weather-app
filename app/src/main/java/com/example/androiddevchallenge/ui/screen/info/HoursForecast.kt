@@ -24,12 +24,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,13 +54,18 @@ fun HoursForecast(forecast: List<HourForecast>) = LazyRow(
 fun HourForecast(forecast: HourForecast) = Row {
     Box(Modifier.clip(CircleShape)) {
         Column(
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .background(color = MaterialTheme.colors.primaryVariant)
-                .height(110.dp)
+                .height(130.dp)
         ) {
             Text(forecast.time)
+            Icon(
+                Icons.Filled.WbSunny,
+                "play",
+                Modifier.size(24.dp)
+            )
             Text(forecast.temperature)
         }
     }
