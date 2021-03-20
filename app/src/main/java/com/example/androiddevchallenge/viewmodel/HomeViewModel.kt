@@ -34,7 +34,8 @@ class HomeViewModel : ViewModel() {
         emit(
             HomeScreenState.Info(
                 CityInfo(
-                    "Córdoba", "25°C", listOf(
+                    "Córdoba", "25°C",
+                    listOf(
                         HourForecast("10:00 AM", "18°C"),
                         HourForecast("11:00 AM", "19°C"),
                         HourForecast("12:00 AM", "20°C"),

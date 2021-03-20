@@ -22,6 +22,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androiddevchallenge.R
+import com.example.androiddevchallenge.ui.screen.info.InfoScreen
 import com.example.androiddevchallenge.viewmodel.HomeScreenState
 import com.example.androiddevchallenge.viewmodel.HomeViewModel
 
