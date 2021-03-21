@@ -15,8 +15,9 @@
  */
 package com.example.androiddevchallenge.ui.screen.info
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -34,7 +35,9 @@ fun InfoScreen(cityInfo: CityInfo) {
     var selectedDay by remember { mutableStateOf("Today") }
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colors.background),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(selectedDay)

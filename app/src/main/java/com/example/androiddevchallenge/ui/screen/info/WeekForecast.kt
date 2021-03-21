@@ -66,21 +66,24 @@ fun DayForecast(forecast: DayForecast, selected: Boolean, onClick: () -> Unit) =
             .clip(CircleShape)
             .clickable { onClick() }
     ) {
+        val textColor =
+            if (selected) MaterialTheme.colors.background else MaterialTheme.colors.onSurface
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .background(color = if (selected) MaterialTheme.colors.background else MaterialTheme.colors.primaryVariant)
+                .background(color = if (selected) MaterialTheme.colors.onSurface else MaterialTheme.colors.surface)
                 .height(130.dp)
                 .width(75.dp)
         ) {
-            Text(forecast.day)
+            Text(forecast.day, color = textColor)
             Icon(
-                Icons.Filled.WbSunny,
-                stringResource(R.string.accessibility_sun),
-                Modifier.size(24.dp)
+                imageVector = Icons.Filled.WbSunny,
+                contentDescription = stringResource(R.string.accessibility_sun),
+                tint = textColor,
+                modifier = Modifier.size(24.dp)
             )
-            Text(forecast.temperature)
+            Text(forecast.temperature, color = textColor)
         }
     }
     Spacer(Modifier.width(8.dp))
