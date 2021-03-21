@@ -26,7 +26,7 @@ class WeatherDataProvider {
             DayForecast(
                 "Today", "25°C",
                 listOf(
-                    HourForecast("10AM", "18°C", "20%"),
+                    HourForecast("10AM", "18°C", "100%"),
                     HourForecast("11AM", "19°C", "20%"),
                     HourForecast("12AM", "20°C", "20%"),
                     HourForecast("1PM", "25°C", "20%"),

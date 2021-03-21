@@ -36,19 +36,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.HourForecast
+import com.example.androiddevchallenge.ui.UiUtils
+
+// dimensions
+const val GRAPH_HEIGHT = 200
+const val BOTTOM_PADDING = 40
+const val TAG_HEIGHT = 20
 
 @Composable
-fun HoursForecast(hoursForecast: List<HourForecast>) = Column(
+fun HoursForecast(hoursForecast: List<HourForecast>, uiUtils: UiUtils) = Column(
     Modifier
         .padding(start = 16.dp)
         .fillMaxWidth()
 ) {
     Text(stringResource(R.string.each_hour), style = MaterialTheme.typography.h5)
-    Row(Modifier.height(150.dp)) {
+    Row(Modifier.height(GRAPH_HEIGHT.dp)) {
         Column(
             Modifier
                 .fillMaxHeight()
-                .padding(bottom = 40.dp),
+                .padding(bottom = BOTTOM_PADDING.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -59,11 +65,16 @@ fun HoursForecast(hoursForecast: List<HourForecast>) = Column(
         LazyRow(Modifier.fillMaxHeight(), verticalAlignment = Alignment.Bottom) {
             items(hoursForecast) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(it.rainChance)
+                    Text(it.rainChance, Modifier.height(TAG_HEIGHT.dp))
                     Column(
                         Modifier
                             .background(color = MaterialTheme.colors.primaryVariant)
-                            .height(30.dp)
+                            .height(
+                                uiUtils.getRainChanceBarHeight(
+                                    it.rainChanceAsInt(),
+                                    GRAPH_HEIGHT - BOTTOM_PADDING - TAG_HEIGHT
+                                )
+                            )
                             .width(10.dp)
                     ) { }
                     Text(it.time)

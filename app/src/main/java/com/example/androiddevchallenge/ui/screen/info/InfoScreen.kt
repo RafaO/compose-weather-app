@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.androiddevchallenge.domain.model.CityInfo
+import com.example.androiddevchallenge.ui.UiUtils
 
 @Composable
 fun InfoScreen(cityInfo: CityInfo) {
@@ -44,6 +45,6 @@ fun InfoScreen(cityInfo: CityInfo) {
         Text(cityInfo.dayTemp(selectedDay), style = MaterialTheme.typography.h1)
         Text(cityInfo.name)
         WeekForecast(cityInfo.weekForecast, selectedDay) { selectedDay = it }
-        HoursForecast(cityInfo.getDayForecast(selectedDay).hoursForecast)
+        HoursForecast(cityInfo.getDayForecast(selectedDay).hoursForecast, UiUtils())
     }
 }

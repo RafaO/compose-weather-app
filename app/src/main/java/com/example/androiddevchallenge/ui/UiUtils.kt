@@ -13,8 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.domain.model
+package com.example.androiddevchallenge.ui
 
-data class HourForecast(val time: String, val temperature: String, val rainChance: String) {
-    fun rainChanceAsInt() = rainChance.split("%")[0].toInt()
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+
+class UiUtils {
+    fun getRainChanceBarHeight(percentage: Int, maxHeight: Int): Dp {
+        return ((percentage * maxHeight) / 100).dp
+    }
 }
