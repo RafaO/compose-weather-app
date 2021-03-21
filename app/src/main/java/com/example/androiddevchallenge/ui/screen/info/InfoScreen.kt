@@ -29,7 +29,7 @@ fun InfoScreen(cityInfo: CityInfo) = Column(
     modifier = Modifier.fillMaxWidth(),
     horizontalAlignment = Alignment.CenterHorizontally
 ) {
-    Text(cityInfo.temperature, style = MaterialTheme.typography.h1)
+    Text(cityInfo.currentTemp(), style = MaterialTheme.typography.h1)
     Text(cityInfo.name)
-    HoursForecast(cityInfo.todayForecast)
+    WeekForecast(cityInfo.weekForecast)
 }

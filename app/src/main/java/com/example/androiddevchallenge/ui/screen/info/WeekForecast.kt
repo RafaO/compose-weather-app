@@ -45,10 +45,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.domain.model.HourForecast
+import com.example.androiddevchallenge.domain.model.DayForecast
 
 @Composable
-fun HoursForecast(forecast: List<HourForecast>) {
+fun WeekForecast(forecast: List<DayForecast>) {
     var selectedIndex by remember { mutableStateOf(0) }
 
     LazyRow(
@@ -57,7 +57,7 @@ fun HoursForecast(forecast: List<HourForecast>) {
             .padding(start = 8.dp)
     ) {
         items(forecast.size) { index ->
-            HourForecast(forecast[index], index == selectedIndex) {
+            DayForecast(forecast[index], index == selectedIndex) {
                 selectedIndex = index
             }
         }
@@ -65,7 +65,7 @@ fun HoursForecast(forecast: List<HourForecast>) {
 }
 
 @Composable
-fun HourForecast(forecast: HourForecast, selected: Boolean, onClick: () -> Unit) = Row {
+fun DayForecast(forecast: DayForecast, selected: Boolean, onClick: () -> Unit) = Row {
     Box(
         Modifier
             .clip(CircleShape)
@@ -78,7 +78,7 @@ fun HourForecast(forecast: HourForecast, selected: Boolean, onClick: () -> Unit)
                 .background(color = if (selected) MaterialTheme.colors.background else MaterialTheme.colors.primaryVariant)
                 .height(130.dp)
         ) {
-            Text(forecast.time)
+            Text(forecast.day)
             Icon(
                 Icons.Filled.WbSunny,
                 stringResource(R.string.accessibility_sun),

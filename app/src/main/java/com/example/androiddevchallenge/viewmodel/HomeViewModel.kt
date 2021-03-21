@@ -18,6 +18,7 @@ package com.example.androiddevchallenge.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.androiddevchallenge.domain.model.CityInfo
+import com.example.androiddevchallenge.domain.model.DayForecast
 import com.example.androiddevchallenge.domain.model.HourForecast
 import kotlinx.coroutines.delay
 
@@ -34,12 +35,17 @@ class HomeViewModel : ViewModel() {
         emit(
             HomeScreenState.Info(
                 CityInfo(
-                    "Córdoba", "25°C",
+                    "Córdoba",
                     listOf(
-                        HourForecast("10:00 AM", "18°C"),
-                        HourForecast("11:00 AM", "19°C"),
-                        HourForecast("12:00 AM", "20°C"),
-                        HourForecast("13:00 AM", "25°C"),
+                        DayForecast(
+                            "Today", "25°C",
+                            listOf(
+                                HourForecast("10:00 AM", "18°C"),
+                                HourForecast("11:00 AM", "19°C"),
+                                HourForecast("12:00 AM", "20°C"),
+                                HourForecast("13:00 AM", "25°C"),
+                            )
+                        )
                     )
                 )
             )
