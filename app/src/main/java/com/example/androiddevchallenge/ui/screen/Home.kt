@@ -25,6 +25,7 @@ import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ViewModelFactory
 import com.example.androiddevchallenge.ui.screen.info.InfoScreen
 import com.example.androiddevchallenge.ui.screen.info.InfoScreenState
+import com.example.androiddevchallenge.ui.screen.loading.LoadingScreen
 import com.example.androiddevchallenge.viewmodel.HomeViewModel
 
 sealed class HomeScreenState {
@@ -48,9 +49,6 @@ fun Content(state: HomeScreenState, homeViewModel: HomeViewModel) {
         is HomeScreenState.Error -> ErrorScreen()
     }
 }
-
-@Composable
-fun LoadingScreen() = Text(stringResource(R.string.loading))
 
 @Composable
 fun ErrorScreen() = Text(stringResource(R.string.error))
