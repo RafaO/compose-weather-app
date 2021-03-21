@@ -15,11 +15,9 @@
  */
 package com.example.androiddevchallenge.ui
 
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 class UiUtils {
-    fun getRainChanceBarHeight(percentage: Int, maxHeight: Int): Dp {
-        return ((percentage * maxHeight) / 100).dp
-    }
+    fun getRainChanceBarHeight(percentage: Int, maxHeight: Int) =
+        ((percentage * maxHeight) / 100).dp
 }
