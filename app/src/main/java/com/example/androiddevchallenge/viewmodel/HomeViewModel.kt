@@ -19,12 +19,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.androiddevchallenge.data.WeatherDataProvider
+import com.example.androiddevchallenge.domain.usecase.BaseUseCase
+import com.example.androiddevchallenge.domain.usecase.GetWeekWeatherUseCase
+import com.example.androiddevchallenge.domain.usecase.invoke
 import com.example.androiddevchallenge.ui.screen.HomeScreenState
 import com.example.androiddevchallenge.ui.screen.info.InfoScreenState
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val dataProvider: WeatherDataProvider) : ViewModel() {
+class HomeViewModel(getWeekWeatherUseCase: GetWeekWeatherUseCase) : ViewModel() {
 
     // Observables
 
@@ -33,8 +35,12 @@ class HomeViewModel(private val dataProvider: WeatherDataProvider) : ViewModel()
 
     init {
         viewModelScope.launch {
-            _state.value =
-                HomeScreenState.Info(InfoScreenState(dataProvider.getWeekInfo(), "Today"))
+            _state.value = when (val result = getWeekWeatherUseCase()) {
+                is BaseUseCase.Result.Success -> HomeScreenState.Info(
+                    InfoScreenState(result.result, "Today")
+                )
+                else -> HomeScreenState.Error
+            }
         }
     }
 

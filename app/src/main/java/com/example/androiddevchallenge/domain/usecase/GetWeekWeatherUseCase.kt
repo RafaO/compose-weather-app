@@ -13,19 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge
+package com.example.androiddevchallenge.domain.usecase
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.androiddevchallenge.data.WeatherDataProvider
-import com.example.androiddevchallenge.domain.usecase.GetWeekWeatherUseCase
-import com.example.androiddevchallenge.viewmodel.HomeViewModel
+import com.example.androiddevchallenge.domain.model.CityInfo
 
-class ViewModelFactory : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HomeViewModel::class.java))
-            return HomeViewModel(GetWeekWeatherUseCase(WeatherDataProvider())) as T
-        throw IllegalArgumentException("Unknown viewmodel")
-    }
+class GetWeekWeatherUseCase(private val dataProvider: WeatherDataProvider) :
+    BaseUseCase<Unit, CityInfo>() {
+    override suspend fun performAction(param: Unit) =
+        dataProvider.getWeekInfo().let { Result.Success(it) }
 }
