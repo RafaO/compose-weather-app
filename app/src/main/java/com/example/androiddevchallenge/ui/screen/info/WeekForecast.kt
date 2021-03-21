@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.DayForecast
 
@@ -76,7 +77,7 @@ fun DayForecast(forecast: DayForecast, selected: Boolean, onClick: () -> Unit) =
                 .height(130.dp)
                 .width(75.dp)
         ) {
-            Text(forecast.day, color = textColor)
+            Text(forecast.day, color = textColor, fontSize = 14.sp)
             Icon(
                 imageVector = Icons.Filled.WbSunny,
                 contentDescription = stringResource(R.string.accessibility_sun),
