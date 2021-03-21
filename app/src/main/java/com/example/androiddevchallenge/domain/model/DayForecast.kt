@@ -15,8 +15,11 @@
  */
 package com.example.androiddevchallenge.domain.model
 
+import androidx.compose.ui.graphics.vector.ImageVector
+
 data class DayForecast(
     val day: String,
     val temperature: String,
+    val icon: ImageVector,
     val hoursForecast: List<HourForecast>
 )

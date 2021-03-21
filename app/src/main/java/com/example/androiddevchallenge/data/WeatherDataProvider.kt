@@ -15,6 +15,10 @@
  */
 package com.example.androiddevchallenge.data
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cloud
+import androidx.compose.material.icons.filled.Storm
+import androidx.compose.material.icons.filled.WbSunny
 import com.example.androiddevchallenge.domain.model.CityInfo
 import com.example.androiddevchallenge.domain.model.DayForecast
 import com.example.androiddevchallenge.domain.model.HourForecast
@@ -27,7 +31,7 @@ class WeatherDataProvider {
             "Córdoba",
             listOf(
                 DayForecast(
-                    "Today", "25°C",
+                    "Today", "25°C", Icons.Filled.WbSunny,
                     listOf(
                         HourForecast("10AM", "18°C", "100%"),
                         HourForecast("11AM", "19°C", "20%"),
@@ -47,7 +51,7 @@ class WeatherDataProvider {
                     )
                 ),
                 DayForecast(
-                    "Tomorrow", "30°C",
+                    "Tomorrow", "30°C", Icons.Filled.Cloud,
                     listOf(
                         HourForecast("10AM", "18°C", "100%"),
                         HourForecast("11AM", "19°C", "20%"),
@@ -67,7 +71,7 @@ class WeatherDataProvider {
                     )
                 ),
                 DayForecast(
-                    "Wednesday", "28°C",
+                    "Wednesday", "28°C", Icons.Filled.Storm,
                     listOf(
                         HourForecast("10AM", "18°C", "100%"),
                         HourForecast("11AM", "19°C", "20%"),
@@ -87,7 +91,7 @@ class WeatherDataProvider {
                     )
                 ),
                 DayForecast(
-                    "Thursday", "28°C",
+                    "Thursday", "28°C", Icons.Filled.Cloud,
                     listOf(
                         HourForecast("10AM", "18°C", "100%"),
                         HourForecast("11AM", "19°C", "20%"),
@@ -107,7 +111,7 @@ class WeatherDataProvider {
                     )
                 ),
                 DayForecast(
-                    "Friday", "30°C",
+                    "Friday", "30°C", Icons.Filled.WbSunny,
                     listOf(
                         HourForecast("10AM", "18°C", "100%"),
                         HourForecast("11AM", "19°C", "20%"),
@@ -127,7 +131,7 @@ class WeatherDataProvider {
                     )
                 ),
                 DayForecast(
-                    "Saturday", "29°C",
+                    "Saturday", "29°C", Icons.Filled.WbSunny,
                     listOf(
                         HourForecast("10AM", "18°C", "100%"),
                         HourForecast("11AM", "19°C", "20%"),
@@ -147,7 +151,7 @@ class WeatherDataProvider {
                     )
                 ),
                 DayForecast(
-                    "Sunday", "30°C",
+                    "Sunday", "30°C", Icons.Filled.WbSunny,
                     listOf(
                         HourForecast("10AM", "18°C", "100%"),
                         HourForecast("11AM", "19°C", "20%"),

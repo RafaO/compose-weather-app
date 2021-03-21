@@ -32,16 +32,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.DayForecast
 
 @Composable
@@ -79,8 +75,8 @@ fun DayForecast(forecast: DayForecast, selected: Boolean, onClick: () -> Unit) =
         ) {
             Text(forecast.day, color = textColor, fontSize = 14.sp)
             Icon(
-                imageVector = Icons.Filled.WbSunny,
-                contentDescription = stringResource(R.string.accessibility_sun),
+                imageVector = forecast.icon,
+                contentDescription = forecast.temperature,
                 tint = textColor,
                 modifier = Modifier.size(24.dp)
             )
