@@ -35,10 +35,10 @@ class WeatherDataProvider {
             DayForecast(
                 "Tomorrow", "26°C",
                 listOf(
-                    HourForecast("10:00 AM", "18°C"),
-                    HourForecast("11:00 AM", "19°C"),
-                    HourForecast("12:00 AM", "20°C"),
-                    HourForecast("13:00 AM", "25°C"),
+                    HourForecast("10:00 AM", "8°C"),
+                    HourForecast("11:00 AM", "9°C"),
+                    HourForecast("12:00 AM", "0°C"),
+                    HourForecast("13:00 AM", "5°C"),
                 )
             )
         )

@@ -35,10 +35,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,8 +44,7 @@ import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.DayForecast
 
 @Composable
-fun WeekForecast(forecast: List<DayForecast>) {
-    var selectedIndex by remember { mutableStateOf(0) }
+fun WeekForecast(forecast: List<DayForecast>, daySelected: String, onDayClicked: (String) -> Unit) {
 
     LazyRow(
         Modifier
@@ -57,8 +52,8 @@ fun WeekForecast(forecast: List<DayForecast>) {
             .padding(start = 8.dp)
     ) {
         items(forecast.size) { index ->
-            DayForecast(forecast[index], index == selectedIndex) {
-                selectedIndex = index
+            DayForecast(forecast[index], forecast[index].day == daySelected) {
+                onDayClicked(forecast[index].day)
             }
         }
     }

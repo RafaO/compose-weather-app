@@ -16,31 +16,22 @@
 package com.example.androiddevchallenge.ui.screen.info
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.example.androiddevchallenge.domain.model.CityInfo
+import com.example.androiddevchallenge.domain.model.HourForecast
 
 @Composable
-fun InfoScreen(cityInfo: CityInfo) {
-
-    var selectedDay by remember { mutableStateOf("Today") }
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(selectedDay)
-        Text(cityInfo.currentTemp(), style = MaterialTheme.typography.h1)
-        Text(cityInfo.name)
-        WeekForecast(cityInfo.weekForecast, selectedDay) { selectedDay = it }
-        HoursForecast(cityInfo.getDayForecast(selectedDay).hoursForecast)
+fun HoursForecast(hoursForecast: List<HourForecast>) = Column {
+    Text("Each hour", style = MaterialTheme.typography.h5)
+    LazyRow {
+        items(hoursForecast) {
+            Column {
+                Text(it.time)
+                Text(it.temperature)
+            }
+        }
     }
 }

@@ -16,5 +16,7 @@
 package com.example.androiddevchallenge.domain.model
 
 data class CityInfo(val name: String, val weekForecast: List<DayForecast>) {
+    // TODO fail gracefully
     fun currentTemp() = weekForecast.find { it.day == "Today" }!!.temperature
+    fun getDayForecast(day: String) = weekForecast.find { it.day == day }!!
 }
