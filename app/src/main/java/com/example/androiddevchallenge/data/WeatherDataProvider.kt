@@ -31,6 +31,15 @@ class WeatherDataProvider {
                     HourForecast("12:00 AM", "20°C"),
                     HourForecast("13:00 AM", "25°C"),
                 )
+            ),
+            DayForecast(
+                "Tomorrow", "26°C",
+                listOf(
+                    HourForecast("10:00 AM", "18°C"),
+                    HourForecast("11:00 AM", "19°C"),
+                    HourForecast("12:00 AM", "20°C"),
+                    HourForecast("13:00 AM", "25°C"),
+                )
             )
         )
     )
