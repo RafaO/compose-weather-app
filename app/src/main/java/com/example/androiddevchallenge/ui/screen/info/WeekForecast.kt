@@ -77,6 +77,7 @@ fun DayForecast(forecast: DayForecast, selected: Boolean, onClick: () -> Unit) =
             modifier = Modifier
                 .background(color = if (selected) MaterialTheme.colors.background else MaterialTheme.colors.primaryVariant)
                 .height(130.dp)
+                .width(75.dp)
         ) {
             Text(forecast.day)
             Icon(
