@@ -14,4 +14,5 @@
     <string name="error">Something went wrong</string>
     <string name="accessibility_sun">sun icon</string>
     <string name="each_hour">Each hour</string>
+    <string name="loading_message">Have a little patience</string>
 </resources>

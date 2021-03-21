@@ -30,7 +30,7 @@ class HomeViewModel(getWeekWeatherUseCase: GetWeekWeatherUseCase) : ViewModel() 
 
     // Observables
 
-    private val _state = MutableLiveData<HomeScreenState>(HomeScreenState.Loading)
+    private val _state = MutableLiveData<HomeScreenState>(HomeScreenState.Loading())
     val state: LiveData<HomeScreenState> = _state
 
     init {

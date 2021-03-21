@@ -26,17 +26,20 @@ import com.example.androiddevchallenge.ViewModelFactory
 import com.example.androiddevchallenge.ui.screen.info.InfoScreen
 import com.example.androiddevchallenge.ui.screen.info.InfoScreenState
 import com.example.androiddevchallenge.ui.screen.loading.LoadingScreen
+import com.example.androiddevchallenge.ui.screen.loading.LoadingScreenState
 import com.example.androiddevchallenge.viewmodel.HomeViewModel
 
 sealed class HomeScreenState {
-    object Loading : HomeScreenState()
+    data class Loading(val loadingState: LoadingScreenState = LoadingScreenState(false)) :
+        HomeScreenState()
+
     data class Info(val infoState: InfoScreenState) : HomeScreenState()
     object Error : HomeScreenState()
 }
 
 @Composable
 fun Home(viewModel: HomeViewModel = viewModel(factory = ViewModelFactory())) {
-    val state by viewModel.state.observeAsState(HomeScreenState.Loading)
+    val state by viewModel.state.observeAsState(HomeScreenState.Loading())
 
     Content(state, viewModel)
 }
@@ -44,7 +47,7 @@ fun Home(viewModel: HomeViewModel = viewModel(factory = ViewModelFactory())) {
 @Composable
 fun Content(state: HomeScreenState, homeViewModel: HomeViewModel) {
     when (state) {
-        is HomeScreenState.Loading -> LoadingScreen()
+        is HomeScreenState.Loading -> LoadingScreen(state.loadingState)
         is HomeScreenState.Info -> InfoScreen(state.infoState, homeViewModel)
         is HomeScreenState.Error -> ErrorScreen()
     }

@@ -24,13 +24,18 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.R
+
+data class LoadingScreenState(val displayMessage: Boolean)
 
 @Composable
-fun LoadingScreen() {
+fun LoadingScreen(loadingScreenState: LoadingScreenState) {
     Surface(
         Modifier
             .background(color = MaterialTheme.colors.background)
@@ -44,6 +49,8 @@ fun LoadingScreen() {
             Box(modifier = Modifier.size(48.dp)) {
                 CircularProgressIndicator()
             }
+            if (loadingScreenState.displayMessage)
+                Text(stringResource(R.string.loading_message))
         }
     }
 }
