@@ -22,7 +22,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.androiddevchallenge.data.WeatherDataProvider
 import com.example.androiddevchallenge.ui.screen.HomeScreenState
 import com.example.androiddevchallenge.ui.screen.info.InfoScreenState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataProvider: WeatherDataProvider) : ViewModel() {
@@ -34,7 +33,6 @@ class HomeViewModel(private val dataProvider: WeatherDataProvider) : ViewModel()
 
     init {
         viewModelScope.launch {
-            delay(1000)
             _state.value =
                 HomeScreenState.Info(InfoScreenState(dataProvider.getWeekInfo(), "Today"))
         }

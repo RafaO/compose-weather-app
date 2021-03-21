@@ -15,6 +15,12 @@
  */
 package com.example.androiddevchallenge.viewmodel
 
+import com.example.androiddevchallenge.data.WeatherDataProvider
+import com.example.androiddevchallenge.domain.model.CityInfo
+import com.example.androiddevchallenge.ui.screen.HomeScreenState
+import com.example.androiddevchallenge.ui.screen.info.InfoScreenState
+import io.mockk.coEvery
+import io.mockk.mockk
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Test
@@ -24,10 +30,61 @@ class HomeViewModelTest : CoroutinesTest() {
 
     @Test
     fun `when created, it emits loading state`() {
+        // given
+        val dataProvider = WeatherDataProvider()
+
         // when
-        val subject = HomeViewModel()
+        val subject = HomeViewModel(dataProvider)
 
         // then
         assertEquals(HomeScreenState.Loading, subject.state.getOrAwaitValue())
+    }
+
+    @Test
+    fun `when data arrives, it emits info state with today selected`() {
+        // given
+        val dataProvider = mockk<WeatherDataProvider>()
+        val cityInfo = CityInfo("Málaga", emptyList())
+        coEvery { dataProvider.getWeekInfo() } returns cityInfo
+
+        // when
+        val subject = HomeViewModel(dataProvider)
+
+        // then
+        assertEquals(
+            HomeScreenState.Info(InfoScreenState(cityInfo, "Today")),
+            subject.state.getOrAwaitValue()
+        )
+    }
+
+    @Test
+    fun `when day is pressed, it updates the selected day`() {
+        // given
+        val dataProvider = mockk<WeatherDataProvider>()
+        val cityInfo = CityInfo("Málaga", emptyList())
+        coEvery { dataProvider.getWeekInfo() } returns cityInfo
+        val subject = HomeViewModel(dataProvider)
+
+        // when
+        subject.dayPressed("wednesday")
+
+        // then
+        assertEquals(
+            HomeScreenState.Info(InfoScreenState(cityInfo, "wednesday")),
+            subject.state.getOrAwaitValue()
+        )
+    }
+
+    @Test
+    fun `when data fetch fails, it emits error state`() {
+        // given
+        val dataProvider = mockk<WeatherDataProvider>()
+        coEvery { dataProvider.getWeekInfo() } throws IllegalStateException("ups")
+
+        // when
+        val subject = HomeViewModel(dataProvider)
+
+        // then
+        assertEquals(HomeScreenState.Error, subject.state.getOrAwaitValue())
     }
 }
