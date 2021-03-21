@@ -13,28 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.screen.loading
+package com.example.androiddevchallenge.ui.screen.error
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.composables.CenterElement
 
-data class LoadingScreenState(val displayMessage: Boolean)
-
 @Composable
-fun LoadingScreen(loadingScreenState: LoadingScreenState) {
-    CenterElement {
-        Box(modifier = Modifier.size(48.dp)) {
-            CircularProgressIndicator()
-        }
-        if (loadingScreenState.displayMessage)
-            Text(stringResource(R.string.loading_message))
-    }
+fun ErrorScreen() = CenterElement {
+    Text(stringResource(R.string.error))
 }

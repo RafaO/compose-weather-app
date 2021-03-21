@@ -15,14 +15,12 @@
  */
 package com.example.androiddevchallenge.ui.screen
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ViewModelFactory
+import com.example.androiddevchallenge.ui.screen.error.ErrorScreen
 import com.example.androiddevchallenge.ui.screen.info.InfoScreen
 import com.example.androiddevchallenge.ui.screen.info.InfoScreenState
 import com.example.androiddevchallenge.ui.screen.loading.LoadingScreen
@@ -52,6 +50,3 @@ fun Content(state: HomeScreenState, homeViewModel: HomeViewModel) {
         is HomeScreenState.Error -> ErrorScreen()
     }
 }
-
-@Composable
-fun ErrorScreen() = Text(stringResource(R.string.error))
