@@ -16,6 +16,7 @@
 package com.example.androiddevchallenge.ui.screen.info
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -62,6 +63,11 @@ fun DayForecast(forecast: DayForecast, selected: Boolean, onClick: () -> Unit) =
         Modifier
             .clip(CircleShape)
             .clickable { onClick() }
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colors.secondaryVariant,
+                shape = CircleShape
+            )
     ) {
         val textColor =
             if (selected) MaterialTheme.colors.background else MaterialTheme.colors.onSurface

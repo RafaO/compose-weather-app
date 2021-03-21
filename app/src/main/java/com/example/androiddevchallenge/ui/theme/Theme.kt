@@ -28,7 +28,8 @@ private val DarkColorPalette = darkColors(
     secondary = teal200,
     background = darkBlue,
     surface = middleBlue,
-    onSurface = Color.White
+    onSurface = Color.White,
+    secondaryVariant = transparentWhite
 )
 
 private val LightColorPalette = lightColors(
