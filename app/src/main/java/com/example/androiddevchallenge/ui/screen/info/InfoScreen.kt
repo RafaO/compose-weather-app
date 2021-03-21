@@ -21,19 +21,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.androiddevchallenge.domain.model.CityInfo
 import com.example.androiddevchallenge.ui.UiUtils
+import com.example.androiddevchallenge.viewmodel.HomeViewModel
+
+data class InfoScreenState(val cityInfo: CityInfo, val selectedDay: String)
 
 @Composable
-fun InfoScreen(cityInfo: CityInfo) {
-
-    var selectedDay by remember { mutableStateOf("Today") }
+fun InfoScreen(infoScreenState: InfoScreenState, viewModel: HomeViewModel) {
 
     Column(
         modifier = Modifier
@@ -41,10 +38,12 @@ fun InfoScreen(cityInfo: CityInfo) {
             .background(color = MaterialTheme.colors.background),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(selectedDay)
-        Text(cityInfo.dayTemp(selectedDay), style = MaterialTheme.typography.h1)
-        Text(cityInfo.name)
-        WeekForecast(cityInfo.weekForecast, selectedDay) { selectedDay = it }
-        HoursForecast(cityInfo.getDayForecast(selectedDay).hoursForecast, UiUtils())
+        with(infoScreenState) {
+            Text(selectedDay)
+            Text(cityInfo.dayTemp(selectedDay), style = MaterialTheme.typography.h1)
+            Text(cityInfo.name)
+            WeekForecast(cityInfo.weekForecast, selectedDay) { viewModel.dayPressed(it) }
+            HoursForecast(cityInfo.getDayForecast(selectedDay).hoursForecast, UiUtils())
+        }
     }
 }

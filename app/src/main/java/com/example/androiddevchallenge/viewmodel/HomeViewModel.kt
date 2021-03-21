@@ -15,23 +15,36 @@
  */
 package com.example.androiddevchallenge.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.example.androiddevchallenge.data.WeatherDataProvider
-import com.example.androiddevchallenge.domain.model.CityInfo
+import com.example.androiddevchallenge.ui.screen.HomeScreenState
+import com.example.androiddevchallenge.ui.screen.info.InfoScreenState
 import kotlinx.coroutines.delay
-
-sealed class HomeScreenState {
-    object Loading : HomeScreenState()
-    class Info(val info: CityInfo) : HomeScreenState()
-    object Error : HomeScreenState()
-}
+import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataProvider: WeatherDataProvider) : ViewModel() {
-    private val _state = liveData {
-        emit(HomeScreenState.Loading)
-        delay(1000)
-        emit(HomeScreenState.Info(dataProvider.getWeekInfo()))
+
+    // Observables
+
+    private val _state = MutableLiveData<HomeScreenState>(HomeScreenState.Loading)
+    val state: LiveData<HomeScreenState> = _state
+
+    init {
+        viewModelScope.launch {
+            delay(1000)
+            _state.value =
+                HomeScreenState.Info(InfoScreenState(dataProvider.getWeekInfo(), "Today"))
+        }
     }
-    val state = _state
+
+    // UI events
+
+    fun dayPressed(day: String) {
+        _state.value = (_state.value as? HomeScreenState.Info)?.let {
+            it.copy(infoState = it.infoState.copy(selectedDay = day))
+        }
+    }
 }
