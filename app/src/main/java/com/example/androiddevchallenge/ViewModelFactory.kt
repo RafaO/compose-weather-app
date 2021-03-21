@@ -13,25 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.viewmodel
+package com.example.androiddevchallenge
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.ViewModelProvider
 import com.example.androiddevchallenge.data.WeatherDataProvider
-import com.example.androiddevchallenge.domain.model.CityInfo
-import kotlinx.coroutines.delay
+import com.example.androiddevchallenge.viewmodel.HomeViewModel
 
-sealed class HomeScreenState {
-    object Loading : HomeScreenState()
-    class Info(val info: CityInfo) : HomeScreenState()
-    object Error : HomeScreenState()
-}
-
-class HomeViewModel(private val dataProvider: WeatherDataProvider) : ViewModel() {
-    private val _state = liveData {
-        emit(HomeScreenState.Loading)
-        delay(1000)
-        emit(HomeScreenState.Info(dataProvider.getWeekInfo()))
+class ViewModelFactory : ViewModelProvider.Factory {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(HomeViewModel::class.java))
+            return HomeViewModel(WeatherDataProvider()) as T
+        throw IllegalArgumentException("Unknown viewmodel")
     }
-    val state = _state
 }

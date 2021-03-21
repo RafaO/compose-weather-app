@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.viewmodel
+package com.example.androiddevchallenge.data
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import com.example.androiddevchallenge.data.WeatherDataProvider
 import com.example.androiddevchallenge.domain.model.CityInfo
-import kotlinx.coroutines.delay
+import com.example.androiddevchallenge.domain.model.DayForecast
+import com.example.androiddevchallenge.domain.model.HourForecast
 
-sealed class HomeScreenState {
-    object Loading : HomeScreenState()
-    class Info(val info: CityInfo) : HomeScreenState()
-    object Error : HomeScreenState()
-}
-
-class HomeViewModel(private val dataProvider: WeatherDataProvider) : ViewModel() {
-    private val _state = liveData {
-        emit(HomeScreenState.Loading)
-        delay(1000)
-        emit(HomeScreenState.Info(dataProvider.getWeekInfo()))
-    }
-    val state = _state
+class WeatherDataProvider {
+    fun getWeekInfo() = CityInfo(
+        "Córdoba",
+        listOf(
+            DayForecast(
+                "Today", "25°C",
+                listOf(
+                    HourForecast("10:00 AM", "18°C"),
+                    HourForecast("11:00 AM", "19°C"),
+                    HourForecast("12:00 AM", "20°C"),
+                    HourForecast("13:00 AM", "25°C"),
+                )
+            )
+        )
+    )
 }
