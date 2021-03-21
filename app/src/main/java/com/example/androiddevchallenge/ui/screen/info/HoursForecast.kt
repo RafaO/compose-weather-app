@@ -21,11 +21,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.HourForecast
 
 @Composable
 fun HoursForecast(hoursForecast: List<HourForecast>) = Column {
-    Text("Each hour", style = MaterialTheme.typography.h5)
+    Text(stringResource(R.string.each_hour), style = MaterialTheme.typography.h5)
     LazyRow {
         items(hoursForecast) {
             Column {
