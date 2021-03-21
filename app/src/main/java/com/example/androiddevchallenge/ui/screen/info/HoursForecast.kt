@@ -15,9 +15,14 @@
  */
 package com.example.androiddevchallenge.ui.screen.info
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -39,13 +44,33 @@ fun HoursForecast(hoursForecast: List<HourForecast>) = Column(
         .fillMaxWidth()
 ) {
     Text(stringResource(R.string.each_hour), style = MaterialTheme.typography.h5)
-    LazyRow {
-        items(hoursForecast) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(it.time)
-                Text(it.temperature)
+    Row(Modifier.height(150.dp)) {
+        Column(
+            Modifier
+                .fillMaxHeight()
+                .padding(bottom = 40.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text("100")
+            Text("50")
+            Text("0")
+        }
+        LazyRow(Modifier.fillMaxHeight(), verticalAlignment = Alignment.Bottom) {
+            items(hoursForecast) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(it.rainChance)
+                    Column(
+                        Modifier
+                            .background(color = MaterialTheme.colors.primaryVariant)
+                            .height(30.dp)
+                            .width(10.dp)
+                    ) { }
+                    Text(it.time)
+                    Text(it.temperature)
+                }
+                Spacer(Modifier.width(24.dp))
             }
-            Spacer(Modifier.width(24.dp))
         }
     }
 }

@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = purple200,
-    primaryVariant = purple700,
+    primaryVariant = Color.Cyan,
     secondary = teal200,
     background = darkBlue,
     surface = middleBlue,

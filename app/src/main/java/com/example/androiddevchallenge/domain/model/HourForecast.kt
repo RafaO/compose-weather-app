@@ -15,4 +15,4 @@
  */
 package com.example.androiddevchallenge.domain.model
 
-data class HourForecast(val time: String, val temperature: String)
+data class HourForecast(val time: String, val temperature: String, val rainChance: String)

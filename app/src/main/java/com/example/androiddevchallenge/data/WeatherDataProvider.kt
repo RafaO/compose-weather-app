@@ -26,19 +26,19 @@ class WeatherDataProvider {
             DayForecast(
                 "Today", "25°C",
                 listOf(
-                    HourForecast("10AM", "18°C"),
-                    HourForecast("11AM", "19°C"),
-                    HourForecast("12AM", "20°C"),
-                    HourForecast("1PM", "25°C"),
+                    HourForecast("10AM", "18°C", "20%"),
+                    HourForecast("11AM", "19°C", "20%"),
+                    HourForecast("12AM", "20°C", "20%"),
+                    HourForecast("1PM", "25°C", "20%"),
                 )
             ),
             DayForecast(
                 "Tomorrow", "26°C",
                 listOf(
-                    HourForecast("10AM", "8°C"),
-                    HourForecast("11AM", "9°C"),
-                    HourForecast("12AM", "0°C"),
-                    HourForecast("1PM", "5°C"),
+                    HourForecast("10AM", "8°C", "20%"),
+                    HourForecast("11AM", "9°C", "20%"),
+                    HourForecast("12AM", "0°C", "20%"),
+                    HourForecast("1PM", "5°C", "20%"),
                 )
             )
         )
