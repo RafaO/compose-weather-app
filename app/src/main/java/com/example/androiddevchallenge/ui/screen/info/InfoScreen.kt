@@ -41,7 +41,7 @@ fun InfoScreen(cityInfo: CityInfo) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(selectedDay)
-        Text(cityInfo.currentTemp(), style = MaterialTheme.typography.h1)
+        Text(cityInfo.dayTemp(selectedDay), style = MaterialTheme.typography.h1)
         Text(cityInfo.name)
         WeekForecast(cityInfo.weekForecast, selectedDay) { selectedDay = it }
         HoursForecast(cityInfo.getDayForecast(selectedDay).hoursForecast)
