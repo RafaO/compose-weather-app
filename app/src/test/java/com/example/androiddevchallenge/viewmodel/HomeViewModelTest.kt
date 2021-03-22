@@ -40,7 +40,7 @@ class HomeViewModelTest : CoroutinesTest() {
         val subject = HomeViewModel(useCase)
 
         // then
-        assertEquals(HomeScreenState.Loading, subject.state.getOrAwaitValue())
+        assertEquals(HomeScreenState.Loading(), subject.state.getOrAwaitValue())
     }
 
     @Test
@@ -82,7 +82,6 @@ class HomeViewModelTest : CoroutinesTest() {
     fun `when data fetch fails, it emits error state`() {
         // given
         val useCase = mockk<GetWeekWeatherUseCase>()
-        val cityInfo = CityInfo("Málaga", emptyList())
         coEvery { useCase() } returns BaseUseCase.Result.Failure()
 
         // when

@@ -17,18 +17,25 @@ package com.example.androiddevchallenge.ui.screen
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
+import com.example.androiddevchallenge.domain.model.CityInfo
+import com.example.androiddevchallenge.domain.usecase.BaseUseCase
+import com.example.androiddevchallenge.domain.usecase.GetWeekWeatherUseCase
+import com.example.androiddevchallenge.domain.usecase.invoke
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.viewmodel.HomeViewModel
+import io.mockk.coEvery
+import io.mockk.mockk
 import org.junit.Rule
 import org.junit.Test
 
 class HomeTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule() // if you don't need access to the activityTestRule
+    val composeTestRule = createComposeRule()
 
     @Test
-    fun cityNameIsDisplayed() {
+    fun loadingScreenIsDisplayed() {
         // Start the app
         composeTestRule.setContent {
             MyTheme {
@@ -36,6 +43,24 @@ class HomeTest {
             }
         }
 
-        composeTestRule.onNodeWithText("Loading").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Loading screen").assertIsDisplayed()
+    }
+
+    @Test
+    fun whenDataArrivesInfoScreenIsDisplayed() {
+        // given
+        val useCase = mockk<GetWeekWeatherUseCase>()
+        coEvery { useCase() } returns BaseUseCase.Result.Success(CityInfo("Málaga", emptyList()))
+        val viewModel = HomeViewModel(useCase)
+
+        // when
+        composeTestRule.setContent {
+            MyTheme {
+                Home(viewModel)
+            }
+        }
+
+        // then
+        composeTestRule.onNodeWithContentDescription("info screen").assertIsDisplayed()
     }
 }
