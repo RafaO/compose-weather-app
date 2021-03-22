@@ -38,6 +38,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
@@ -98,7 +99,14 @@ fun Hour(it: HourForecast, uiUtils: UiUtils, position: Int) {
         Text(it.rainChance, Modifier.height(TAG_HEIGHT.dp))
         Column(
             Modifier
-                .background(color = MaterialTheme.colors.primaryVariant)
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            MaterialTheme.colors.primaryVariant,
+                            MaterialTheme.colors.background
+                        ),
+                    )
+                )
                 .height(height)
                 .width(10.dp)
         ) {}
