@@ -21,7 +21,10 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.composables.CenterElement
@@ -30,7 +33,12 @@ data class LoadingScreenState(val displayMessage: Boolean)
 
 @Composable
 fun LoadingScreen(loadingScreenState: LoadingScreenState) {
-    CenterElement {
+    val resources = LocalContext.current.resources
+    CenterElement(
+        Modifier.semantics {
+            contentDescription = resources.getString(R.string.content_description_loading)
+        }
+    ) {
         Box(modifier = Modifier.size(48.dp)) {
             CircularProgressIndicator()
         }

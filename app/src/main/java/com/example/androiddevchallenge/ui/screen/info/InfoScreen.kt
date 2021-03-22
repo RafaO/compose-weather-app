@@ -17,33 +17,54 @@ package com.example.androiddevchallenge.ui.screen.info
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.CityInfo
 import com.example.androiddevchallenge.ui.UiUtils
+import com.example.androiddevchallenge.ui.composables.TemperatureText
 import com.example.androiddevchallenge.viewmodel.HomeViewModel
 
 data class InfoScreenState(val cityInfo: CityInfo, val selectedDay: String)
 
 @Composable
 fun InfoScreen(infoScreenState: InfoScreenState, viewModel: HomeViewModel) {
+    val resources = LocalContext.current.resources
 
     Column(
         modifier = Modifier
+            .semantics {
+                contentDescription = resources.getString(R.string.content_description_info_screen)
+            }
             .fillMaxSize()
+            .padding(top = 16.dp)
             .background(color = MaterialTheme.colors.background),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         with(infoScreenState) {
             Text(selectedDay)
-            Text(cityInfo.dayTemp(selectedDay), style = MaterialTheme.typography.h1)
+            TemperatureText(
+                temperature = cityInfo.dayTemp(selectedDay),
+                MaterialTheme.typography.h1
+            )
             Text(cityInfo.name)
+            Spacer(Modifier.height(16.dp))
             WeekForecast(cityInfo.weekForecast, selectedDay) { viewModel.dayPressed(it) }
-            HoursForecast(cityInfo.getDayForecast(selectedDay).hoursForecast, UiUtils())
+            Spacer(Modifier.height(16.dp))
+            cityInfo.getDayForecast(selectedDay)?.hoursForecast?.let {
+                HoursForecast(it, UiUtils())
+            }
         }
     }
 }

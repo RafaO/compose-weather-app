@@ -14,4 +14,6 @@
     <string name="error">Something went wrong</string>
     <string name="each_hour">Each hour</string>
     <string name="loading_message">Have a little patience</string>
+    <string name="content_description_loading">Loading screen</string>
+    <string name="content_description_info_screen">info screen</string>
 </resources>

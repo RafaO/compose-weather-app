@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.domain.model.HourForecast
 import com.example.androiddevchallenge.ui.UiUtils
+import com.example.androiddevchallenge.ui.composables.TemperatureText
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -102,7 +103,7 @@ fun Hour(it: HourForecast, uiUtils: UiUtils, position: Int) {
                 .width(10.dp)
         ) {}
         Text(it.time)
-        Text(it.temperature)
+        TemperatureText(it.temperature)
     }
     Spacer(Modifier.width(24.dp))
 }

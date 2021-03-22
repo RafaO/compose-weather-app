@@ -26,8 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun CenterElement(content: @Composable () -> Unit) = Surface(
-    Modifier
+fun CenterElement(modifier: Modifier = Modifier, content: @Composable () -> Unit) = Surface(
+    modifier
         .background(color = MaterialTheme.colors.background)
         .fillMaxSize()
 ) {

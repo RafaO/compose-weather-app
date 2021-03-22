@@ -40,6 +40,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.domain.model.DayForecast
+import com.example.androiddevchallenge.ui.composables.TemperatureText
 
 @Composable
 fun WeekForecast(forecast: List<DayForecast>, daySelected: String, onDayClicked: (String) -> Unit) {
@@ -86,7 +87,10 @@ fun DayForecast(forecast: DayForecast, selected: Boolean, onClick: () -> Unit) =
                 tint = textColor,
                 modifier = Modifier.size(24.dp)
             )
-            Text(forecast.temperature, color = textColor)
+            TemperatureText(
+                temperature = forecast.temperature,
+                color = textColor,
+            )
         }
     }
     Spacer(Modifier.width(8.dp))
