@@ -17,11 +17,23 @@ package com.example.androiddevchallenge.ui.screen.error
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.composables.CenterElement
 
 @Composable
-fun ErrorScreen() = CenterElement {
-    Text(stringResource(R.string.error))
+fun ErrorScreen() {
+    val resources = LocalContext.current.resources
+
+    CenterElement(
+        Modifier.semantics {
+            contentDescription = resources.getString(R.string.content_description_error_screen)
+        }
+    ) {
+        Text(stringResource(R.string.error))
+    }
 }

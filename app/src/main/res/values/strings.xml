@@ -16,4 +16,5 @@
     <string name="loading_message">Have a little patience</string>
     <string name="content_description_loading">Loading screen</string>
     <string name="content_description_info_screen">info screen</string>
+    <string name="content_description_error_screen">error screen</string>
 </resources>

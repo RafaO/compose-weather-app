@@ -47,7 +47,7 @@ class HomeTest {
     }
 
     @Test
-    fun whenDataArrivesInfoScreenIsDisplayed() {
+    fun whenDataArrives_InfoScreenIsDisplayed() {
         // given
         val useCase = mockk<GetWeekWeatherUseCase>()
         coEvery { useCase() } returns BaseUseCase.Result.Success(CityInfo("Málaga", emptyList()))
@@ -62,5 +62,23 @@ class HomeTest {
 
         // then
         composeTestRule.onNodeWithContentDescription("info screen").assertIsDisplayed()
+    }
+
+    @Test
+    fun whenError_errorScreenIsDisplayed() {
+        // given
+        val useCase = mockk<GetWeekWeatherUseCase>()
+        coEvery { useCase() } returns BaseUseCase.Result.Failure()
+        val viewModel = HomeViewModel(useCase)
+
+        // when
+        composeTestRule.setContent {
+            MyTheme {
+                Home(viewModel)
+            }
+        }
+
+        // then
+        composeTestRule.onNodeWithContentDescription("error screen").assertIsDisplayed()
     }
 }
