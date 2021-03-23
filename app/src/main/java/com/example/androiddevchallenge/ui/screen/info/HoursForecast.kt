@@ -17,11 +17,8 @@ package com.example.androiddevchallenge.ui.screen.info
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -61,21 +58,8 @@ fun HoursForecast(hoursForecast: List<HourForecast>, uiUtils: UiUtils) = Column(
         .fillMaxWidth()
 ) {
     Text(stringResource(R.string.each_hour), style = MaterialTheme.typography.h5)
-    Row(Modifier.height(GRAPH_HEIGHT.dp)) {
-        Column(
-            Modifier
-                .fillMaxHeight()
-                .padding(bottom = BOTTOM_PADDING.dp),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text("100")
-            Text("50")
-            Text("0")
-        }
-        LazyRow(Modifier.fillMaxHeight(), verticalAlignment = Alignment.Bottom) {
-            itemsIndexed(hoursForecast) { index, hour -> Hour(hour, uiUtils, index) }
-        }
+    LazyRow(Modifier.height(GRAPH_HEIGHT.dp), verticalAlignment = Alignment.Bottom) {
+        itemsIndexed(hoursForecast) { index, hour -> Hour(hour, uiUtils, index) }
     }
 }
 
