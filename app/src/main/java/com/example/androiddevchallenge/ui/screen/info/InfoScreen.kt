@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge.ui.screen.info
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -54,10 +55,12 @@ fun InfoScreen(infoScreenState: InfoScreenState, viewModel: HomeViewModel) {
     ) {
         with(infoScreenState) {
             Text(selectedDay)
-            TemperatureText(
-                temperature = cityInfo.dayTemp(selectedDay),
-                MaterialTheme.typography.h1
-            )
+            Crossfade(targetState = cityInfo.dayTemp(selectedDay)) {
+                TemperatureText(
+                    temperature = it,
+                    MaterialTheme.typography.h1
+                )
+            }
             Text(cityInfo.name)
             Spacer(Modifier.height(16.dp))
             WeekForecast(cityInfo.weekForecast, selectedDay) { viewModel.dayPressed(it) }
